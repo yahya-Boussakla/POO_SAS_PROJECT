@@ -19,6 +19,6 @@ function lireLivreDepuisFichier(string $fichier) : Livre {
     $json = file_get_contents($fichier);
     return json_decode($json);
 }
-
+    
 
 ?>

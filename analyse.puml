@@ -1,24 +1,28 @@
-@startuml Library Management System
-
+@startuml library
 left to right direction
-actor "Admin" as admin
 
-package "Library Management System" {
-  usecase "Create Book" as UC1
-  usecase "Search Book" as UC2
-  usecase "Update Book" as UC3
-  usecase "Delete Book" as UC4
-  usecase "Create User" as UC5
-  usecase "Update User" as UC6
-  usecase "Delete User" as UC7
-  
+actor Admin
+actor Reader
+
+rectangle library{
+usecase "Manage Books" as UC_ManageBook
+usecase "View Available Books" as UC_ViewAvailableBooks
+usecase "Advanced Search" as UC_AdvancedSearch
+usecase "Search a Book" as UC_SearchBook
+usecase "Display Available Books in Console" as UC_DisplayBooksConsole
+usecase "Borrow a Book" as UC_BorrowBook
+usecase "Manage Authors" as UC_ManageAuthors
+usecase "Manage Readers" as UC_ManageReaders
 }
 
-admin -- UC1
-admin -- UC2
-admin -- UC3
-admin -- UC4
-admin -- UC5
-admin -- UC6
-admin -- UC7
+UC_ViewAvailableBooks  <.. UC_SearchBook : <<extend>>
+UC_ManageBook <.. UC_AdvancedSearch : <<extend>>
+UC_ManageBook <.. UC_DisplayBooksConsole : <<extend>>
+UC_ManageBook <.. UC_BorrowBook: <<extend>>
+
+Admin -- UC_ManageBook : "Manage"
+Admin -- UC_ManageAuthors : "Manage"
+Admin -- UC_ManageReaders : "Manage"
+
+Reader -- UC_ViewAvailableBooks : "View"
 @enduml
