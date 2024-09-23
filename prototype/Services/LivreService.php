@@ -1,36 +1,34 @@
-<?php 
+<?php
+    require_once dirname(__FILE__)."/../DataAccess/livreDAO.php";
 
-class logicManager {
+class BookServices{
 
-    private $dataClass;
-
+    private $data;
 
     public function __construct(){
-
-        require(dirname(__FILE__).'/../data/dataManager.php');    
-        $this->dataClass = new dataManager();
-       
-
+        $this->data = new BookDAO();
     }
 
-    public function addLivre($livre){
+   
 
-
-        $livres = $this->dataClass->getData();
-        array_push($livres['livres'],$livre);
-        $this->dataClass->setData($livres);
-
+    function addBook($book){
+    
+        $books = $this->data->getBooks();
+        array_push($books,$book);
+        $this->data->addBook($books);
+    
     }
+
+    function getBooks(){
+        return $list = $this->data->getBooks();
+    }
+
+    
+
 
 }
 
-$clas = new logicManager();
-$data = [
-    'name' => 'yahya',
-];
 
-
-$clas->addLivre($data);
 
 
 ?>

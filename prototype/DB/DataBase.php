@@ -1,31 +1,33 @@
-<?php
+<?php 
+class DataBase {
 
+    public $books=[];
 
-class Database{
-
-    private $jsonFilePath;
-
-    public function __construct(){
-
-        $this->jsonFilePath = dirname(__FILE__).'/DataBase.json';
-
+    public function __construct() {
+        if($this->getData()){
+            $this->books = $this->getData()->books;
+         }
     }
 
 
-    public function getData(){
-        $data = file_get_contents($this->jsonFilePath);
-        return json_decode($data,true);
+    private function getData(){
+        $dataPath = file_get_contents( dirname(__FILE__)."/db.txt");
+        $Data = unserialize($dataPath);
+        return  $Data;
     }
-
-    public function setData($data){
-        $json = json_encode($data, JSON_PRETTY_PRINT);
-        file_put_contents($this->jsonFilePath, $json);
+    
+    private function setData(){
+        $jsonData = serialize($this);
+        file_put_contents(dirname(__FILE__)."/db.txt", $jsonData);
+        
     }
+  
+    public function save(){
+        $this->setData();
+    }
+    
+}    
 
-}
-
-// $class = new DataBase();
-// var_dump($class);
 
 
 ?>
