@@ -1,4 +1,9 @@
 <?php 
+
+namespace yahya\DB;
+
+require_once dirname(__FILE__)."/db.txt";
+
 class DataBase {
 
     public $books=[];
@@ -6,9 +11,8 @@ class DataBase {
     public function __construct() {
         if($this->getData()){
             $this->books = $this->getData()->books;
-         }
+        }
     }
-
 
     private function getData(){
         $dataPath = file_get_contents( dirname(__FILE__)."/db.txt");

@@ -1,5 +1,10 @@
 <?php
-    require_once dirname(__FILE__).'../../db/DataBase.php';
+
+namespace yahya\DATAACCESS;
+
+    // require_once dirname(__FILE__).'../../db/DataBase.php';
+    use yahya\DB\DataBase;
+    
     class BookDAO{
         private $data;
         public function __construct() {
@@ -16,6 +21,12 @@
             $this->data->books = $books;
             $this->data->save();
         
+        }
+
+        public function deleteBook($books){
+            $this->data->books = $books;
+            $this->data->save();
+
         }
 
     }
